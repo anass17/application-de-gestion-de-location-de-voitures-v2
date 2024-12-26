@@ -1,19 +1,19 @@
 <?php
 
-include("../connection/db.php");
 
 class User {
     private $conn;
 
     // User properties
-    public $id;
-    public $username;
-    public $password;
-    public $email;
-    public $created_at;
-    public $role;
-    public $phone;
-    public $address;
+    private $id;
+    private $username;
+    private $password;
+    private $email;
+    private $created_at;
+    private $role;
+    private $phone;
+    private $address;
+    public $error;
 
     public function __construct($conn) {
         $this->conn = $conn;
@@ -75,25 +75,28 @@ public function isAdmin() {
     return $this->role === 'admin';
 }
     // Create a new user
-    public function register() {
-        if (empty($this->username) || empty($this->email) || empty($this->password)) {
-            return "All fields are required.";
+    public function register($username, $email, $password) {
+        $this -> username = $username;
+        $this -> email = $email;
+        $this -> password = $password;
+
+        if ($this->userExists($this -> username, $this -> email)) {
+            $this -> error = "Username or email already exists";
+            return false;
         }
 
-        if ($this->userExists($this->username, $this->email)) {
-            return "Username or email already exists.";
-        }
+        $hashedPassword = password_hash($this -> password, PASSWORD_DEFAULT);
 
-        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO users (username, email, password, role, phoneN, Address) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, email, password, role, phoneN, Address) VALUES (?, ?, ?, 'admin', ?, ?)";
         $stmt = $this->conn->prepare($sql);
 
-        if ($stmt->execute([$this->username, $this->email, $hashedPassword, $this->role, $this->phone, $this->address])) {
+        if ($stmt->execute([$this->username, $this->email, $hashedPassword, $this->phone, $this->address])) {
             $this->id = $this->conn->lastInsertId(); // Set the ID of the newly created user
-            return "Registration successful.";
+            return true;
         }
-        return "Error registering user.";
+
+        $this -> error = "Error registering user";
+        return false;
     }
 
     // Login method
