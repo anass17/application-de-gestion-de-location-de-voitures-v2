@@ -21,59 +21,60 @@ class User {
 
 
  // Getters
- public function getId() {
-    return $this->id;
-}
+    public function getId() {
+        return $this->id;
+    }
 
-public function getUsername() {
-    return $this->username;
-}
+    public function getUsername() {
+        return $this->username;
+    }
 
-public function getEmail() {
-    return $this->email;
-}
+    public function getEmail() {
+        return $this->email;
+    }
 
-public function getRole() {
-    return $this->role;
-}
+    public function getRole() {
+        return $this->role;
+    }
 
-public function getPhoneN() {
-    return $this->phone;
-}
+    public function getPhoneN() {
+        return $this->phone;
+    }
 
-public function getAddress() {
-    return $this->address;
-}
+    public function getAddress() {
+        return $this->address;
+    }
 
-// Setters
-public function setId($id) {
-    $this->id = $id;
-}
+    // Setters
+    public function setId($id) {
+        $this->id = $id;
+    }
 
-public function setUsername($username) {
-    $this->username = $username;
-}
+    public function setUsername($username) {
+        $this->username = $username;
+    }
 
-public function setEmail($email) {
-    $this->email = $email;
-}
+    public function setEmail($email) {
+        $this->email = $email;
+    }
 
-public function setRole($role) {
-    $this->role = $role;
-}
+    public function setRole($role) {
+        $this->role = $role;
+    }
 
-public function setPhoneN($phone) {
-    $this->phone = $phone;
-}
+    public function setPhoneN($phone) {
+        $this->phone = $phone;
+    }
 
-public function setAddress($address) {
-    $this->address = $address;
-}
+    public function setAddress($address) {
+        $this->address = $address;
+    }
 
-// Check if the user has admin privileges
-public function isAdmin() {
-    return $this->role === 'admin';
-}
+    // Check if the user has admin privileges
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
+
     // Create a new user
     public function register($username, $email, $password) {
         $this -> username = $username;
@@ -100,26 +101,23 @@ public function isAdmin() {
     }
 
     // Login method
-    public function login($username, $password) {
-        $sql = "SELECT * FROM users WHERE username = ?";
+    public function login($email, $password) {
+        $sql = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$username]);
+        $stmt->execute([$email]);
 
         if ($stmt->rowCount() === 1) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $user['password'])) {
                 $_SESSION["id"] = $user['id'];
-                return [
-                    'status' => true,
-                    'user' => [
-                        'id' => $user['id'],
-                        'username' => $user['username'],
-                        'role' => $user['role'],
-                    ]
-                ];
+                $this -> id = $user['id'];
+                $this -> username = $user['username'];
+                $this -> role = $user['role'];
+                return true;
             }
         }
-        return ['status' => false, 'message' => 'Invalid username or password.'];
+        $this -> error = "Invalid username or password";
+        return false;
     }
 
 

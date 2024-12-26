@@ -16,17 +16,17 @@ require 'UserClass.php';
 $conn = (new Database()) -> connect();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $validator = new Validator($_POST['email'], $_POST['password'], $_POST['username'], $_POST['confirm_password']);
+    $validator = new Validator($_POST['email'], $_POST['password']);
 
     // Verify Input data
 
-    if ($validator -> verifyRegister()) {
+    if ($validator -> verifyLogin()) {
 
         $user = new User($conn);
 
         // Register new user
 
-        if ($user -> register($_POST["username"], $_POST["email"], $_POST["password"]) === true) {
+        if ($user -> login($_POST["email"], $_POST["password"]) === true) {
             $_SESSION["id"] = $user -> getId();
             header('Location: ../index.php');
             exit;
@@ -60,12 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif; ?>
         <form method="POST">
             <div class="mb-4">
-                <label class="block text-gray-700">Username:</label>
-                <input type="text" name="username" required class="shadow appearance-none border rounded w-full py-2 px-3">
+                <label class="block text-gray-700">Email:</label>
+                <input type="text" name="email" class="shadow appearance-none border rounded w-full py-2 px-3">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700">Password:</label>
-                <input type="password" name="password" required class="shadow appearance-none border rounded w-full py-2 px-3">
+                <input type="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3">
             </div>
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">Login</button>
         </form>
