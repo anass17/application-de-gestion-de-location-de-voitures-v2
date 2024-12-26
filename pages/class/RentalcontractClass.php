@@ -1,7 +1,4 @@
 <?php
-require_once '../../auth/UserClass.php';
-require_once '../../connection/db.php';
-
 class RentalContract {
     private $conn;
     private User $user;
@@ -127,39 +124,4 @@ class RentalContract {
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-}
-
-
-
-$db = new Database();
-
-
-$conn = $db->connect();
-
-// Assuming we have a logged-in user
-$user = new User($conn); // Assume the user is authenticated and the connection is $conn
-$user->fetchById(1); // Use token from session to load user data
-
-
-
-// / Create a user instance
-$user = new User($conn);
-$user->fetchById(1); // Load user details by ID (e.g., from a session or token)
-
-echo $user->username; 
-
-// Create a RentalContract instance
-$rentalContract = new RentalContract($conn, $user);
-
-// Set properties for the rental contract
-$rentalContract->setCarId(5);
-$rentalContract->setRentalDate('2024-12-26');
-$rentalContract->setReturnDate('2025-01-02');
-$rentalContract->setTotalAmount(500.00);
-
-// Save the rental contract to the database
-if ($rentalContract->create()) {
-    echo "Rental contract created successfully.";
-} else {
-    echo "Failed to create rental contract.";
 }
