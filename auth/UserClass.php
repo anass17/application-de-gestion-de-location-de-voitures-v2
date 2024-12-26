@@ -1,9 +1,7 @@
 <?php
-session_start();
 
 include("../connection/db.php");
 
-$_SESSION["id"] = 1;
 class User {
     private $conn;
 
