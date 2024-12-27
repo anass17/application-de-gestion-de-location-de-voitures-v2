@@ -132,9 +132,9 @@ class User {
 
     // Update user details
     public function update() {
-        $sql = "UPDATE users SET username = ?, email = ?, role = ?, phoneN = ?, Address = ? WHERE id = ?";
+        $sql = "UPDATE users SET username = ?, email = ?, phoneN = ?, Address = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([$this->username, $this->email, $this->role, $this->phone, $this->address, $this->id]);
+        return $stmt->execute([$this->username, $this->email, $this->phone, $this->address, $this->id]);
     }
 
     // Delete user
