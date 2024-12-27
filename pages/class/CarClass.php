@@ -85,11 +85,8 @@ class Car {
         return false;
     }
 
-    // Read all cars (admin only)
+    // Read all cars
     public function readAll() {
-        // if (!$this->user->isAdmin()) {
-        //     return "You don't have permission to view cars.";
-        // }
 
         $sql = "SELECT * FROM cars";
         $stmt = $this->conn->prepare($sql);
