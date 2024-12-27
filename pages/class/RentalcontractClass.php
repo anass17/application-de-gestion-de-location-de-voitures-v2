@@ -1,4 +1,5 @@
 <?php
+
 class RentalContract {
     private $conn;
     private User $user;
@@ -61,6 +62,9 @@ class RentalContract {
     public function setUserId($user_id) {
         $this->user_id = $user_id;
     }
+    public function setId($id) {
+        $this->id = $id;
+    }
 
     // Create a new rental contract
     public function create() {
@@ -90,6 +94,9 @@ class RentalContract {
 
     // Update rental contract
     public function update() {
+        if (!$this->user->isAdmin()) {
+            return "You don't have permission to view cars.";
+        }
         $sql = "UPDATE rentalcontracts SET car_id = ?, rental_date = ?, return_date = ?, total_amount = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
@@ -103,6 +110,9 @@ class RentalContract {
 
     // Delete rental contract
     public function delete() {
+        if (!$this->user->isAdmin()) {
+            return "You don't have permission to view cars.";
+        }
         $sql = "DELETE FROM rentalcontracts WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$this->id]);
