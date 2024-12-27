@@ -10,6 +10,7 @@ class Car {
     private $year;
     private $license_plate;
     private $status;
+    public $error;
 
     public function __construct($conn, User $user) {
         $this->conn = $conn;
@@ -69,7 +70,8 @@ class Car {
     // Create a new car (admin only)
     public function create() {
         if (!$this->user->isAdmin()) {
-            return "You don't have permission to add a car.";
+            $this -> error = "You don't have permission to add a car";
+            return false;
         }
 
         $sql = "INSERT INTO cars (make, model, year, license_plate, status) VALUES (?, ?, ?, ?, ?)";
@@ -77,9 +79,10 @@ class Car {
 
         if ($stmt->execute([$this->make, $this->model, $this->year, $this->license_plate, $this->status])) {
             $this->id = $this->conn->lastInsertId(); // Set the ID of the newly created car
-            return "Car created successfully.";
+            return true;
         }
-        return "Error creating car.";
+        $this -> error = "Error creating car";
+        return false;
     }
 
     // Read all cars (admin only)

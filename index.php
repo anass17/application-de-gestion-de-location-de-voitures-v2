@@ -31,7 +31,7 @@
     <nav class="bg-blue-600 text-white p-4 shadow">
         <ul class="flex justify-around">
             <li><a href="pages/view_clients.php" class="hover:text-gray-200">View Clients</a></li>
-            <li><a href="pages/add_car.php" class="hover:text-gray-200">Add Cars</a></li>
+            <li><a href="pages/admin/add_car.php" class="hover:text-gray-200">Add Cars</a></li>
             <li><a href="pages/view_cars.php" class="hover:text-gray-200">View Cars</a></li>
             <li><a href="pages/add_rental_contract.php" class="hover:text-gray-200">Add Rental Contract</a></li>
             <li><a href="pages/view_rental_contracts.php" class="hover:text-gray-200">View Rental Contracts</a></li>
