@@ -5,6 +5,7 @@
         <li><a href="/pages/user/view_cars.php" class="hover:text-gray-200">View Cars</a></li>
         <li><a href="/pages/user/add_rental_contract.php" class="hover:text-gray-200">Add Rental Contracts</a></li>
         <li><a href="/pages/admin/view_rental_contracts.php" class="hover:text-gray-200">View Rental Contracts</a></li>
+        <li><a href="/pages/user/view_my_rental_contracts.php" class="hover:text-gray-200">My Contracts</a></li>
         <li><a href="/auth/logout.php" class="hover:text-gray-200">Logout</a></li>
     </ul>
 </nav>

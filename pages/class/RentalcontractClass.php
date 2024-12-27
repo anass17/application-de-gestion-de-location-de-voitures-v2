@@ -120,8 +120,15 @@ class RentalContract {
 
     // Fetch all rental contracts
     public function fetchAll() {
-        $sql = "SELECT * FROM rentalcontracts";
+        $sql = "SELECT * FROM rentalcontracts JOIN users ON rentalcontracts.ID_user = users.id JOIN cars on rentalContracts.car_id = cars.id";
         $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function fetchMyContracts() {
+        $sql = "SELECT * FROM rentalcontracts JOIN users ON rentalcontracts.ID_user = users.id JOIN cars on rentalContracts.car_id = cars.id where users.id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt -> execute(array(':id' => $this -> user -> getId()));
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
