@@ -56,15 +56,15 @@
                 if (count($contracts_result) > 0) {
                     foreach ($contracts_result as $row) {
                         echo "<tr class='text-center'>
-                                <td class='py-2 px-4 border'>{$row['id']}</td>
+                                <td class='py-2 px-4 border'>{$row['contract_id']}</td>
                                 <td class='py-2 px-4 border'>{$row['username']}</td>
                                 <td class='py-2 px-4 border'>{$row['make']}</td>
                                 <td class='py-2 px-4 border'>{$row['rental_date']}</td>
                                 <td class='py-2 px-4 border'>{$row['return_date']}</td>
                                 <td class='py-2 px-4 border'>{$row['total_amount']}</td>
                                 <td class='py-2 px-4 border'>
-                                    <a href='edit_rental_contract.php?id={$row['id']}' class='bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600'>Edit</a>
-                                    <a href='delete_rental_contract.php?id={$row['id']}' class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600'>Delete</a>
+                                    <a href='edit_rental_contract.php?id={$row['contract_id']}' class='bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600'>Edit</a>
+                                    <a href='delete_rental_contract.php?id={$row['contract_id']}' class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600'>Delete</a>
                                 </td>
                             </tr>";
                     }

@@ -11,6 +11,7 @@ class RentalContract {
     private $return_date;
     private $total_amount;
     private $user_id;
+    public $error;
 
     public function __construct($conn, User $user) {
         $this->conn = $conn;
@@ -95,15 +96,15 @@ class RentalContract {
     // Update rental contract
     public function update() {
         if (!$this->user->isAdmin()) {
-            return "You don't have permission to view cars.";
+            $this -> error = "You don't have permission to view cars";
+            return false;
         }
-        $sql = "UPDATE rentalcontracts SET car_id = ?, rental_date = ?, return_date = ?, total_amount = ? WHERE id = ?";
+        $sql = "UPDATE rentalcontracts SET car_id = ?, rental_date = ?, return_date = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
             $this->car_id,
             $this->rental_date,
             $this->return_date,
-            $this->total_amount,
             $this->id
         ]);
     }
@@ -130,7 +131,7 @@ class RentalContract {
 
     // Fetch all rental contracts
     public function fetchAll() {
-        $sql = "SELECT * FROM rentalcontracts JOIN users ON rentalcontracts.ID_user = users.id JOIN cars on rentalContracts.car_id = cars.id";
+        $sql = "SELECT *, rentalcontracts.id as contract_id FROM rentalcontracts JOIN users ON rentalcontracts.ID_user = users.id JOIN cars on rentalContracts.car_id = cars.id";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
