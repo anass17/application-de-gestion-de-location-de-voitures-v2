@@ -44,7 +44,9 @@
                 <tr>
                     <th class="py-2 px-4 border">ID</th>
                     <th class="py-2 px-4 border">Client Name</th> <!-- Show client name -->
+                    <th class="py-2 px-4 border">License Plate</th>
                     <th class="py-2 px-4 border">Car Make</th>
+                    <th class="py-2 px-4 border">Car Model</th>
                     <th class="py-2 px-4 border">Rental Date</th>
                     <th class="py-2 px-4 border">Return Date</th>
                     <th class="py-2 px-4 border">Actions</th>
@@ -57,7 +59,9 @@
                         echo "<tr class='text-center'>
                                 <td class='py-2 px-4 border'>{$row['contract_id']}</td>
                                 <td class='py-2 px-4 border'>{$row['username']}</td>
+                                <td class='py-2 px-4 border'>{$row['license_plate']}</td>
                                 <td class='py-2 px-4 border'>{$row['make']}</td>
+                                <td class='py-2 px-4 border'>{$row['model']}</td>
                                 <td class='py-2 px-4 border'>{$row['rental_date']}</td>
                                 <td class='py-2 px-4 border'>{$row['return_date']}</td>
                                 <td class='py-2 px-4 border'>

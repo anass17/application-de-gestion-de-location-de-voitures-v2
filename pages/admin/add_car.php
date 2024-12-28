@@ -78,7 +78,6 @@
                 <label class="block text-gray-700">Status:</label>
                 <select name="status" class="shadow appearance-none border rounded w-full py-2 px-3">
                     <option value="Available">Available</option>
-                    <option value="Rented">Rented</option>
                     <option value="Maintenance">Maintenance</option>
                 </select>
             </div>

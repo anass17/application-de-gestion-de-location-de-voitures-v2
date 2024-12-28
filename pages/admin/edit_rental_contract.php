@@ -82,7 +82,6 @@
                     <?php foreach ($cars_result as $row): ?>
                         <option value="<?php echo $row['id']; ?>" <?php echo ($row['id'] == $contracts_result['car_id']) ? 'selected' : ''; ?>>
                             <?php echo $row['make'] . ' ' . $row['model']; ?>
-                            dsdf
                         </option>
                     <?php endforeach; ?>
                 </select>

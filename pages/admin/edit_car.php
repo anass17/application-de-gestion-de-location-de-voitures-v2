@@ -64,17 +64,7 @@
 <body class="bg-gray-100">
 
     <!-- Navbar Section -->
-    <nav class="bg-blue-600 text-white p-4 shadow">
-        <ul class="flex justify-around">
-            <li><a href="adduser.html" class="hover:text-gray-200">Add Client</a></li>
-            <li><a href="view_clients.php" class="hover:text-gray-200">View Clients</a></li>
-            <li><a href="view_cars.php" class="hover:text-gray-200">View Cars</a></li>
-            <li><a href="add_car.php" class="hover:text-gray-200">Add Cars</a></li>
-            <li><a href="add_rental_contract.php" class="hover:text-gray-200">Add Rental Contracts</a></li>
-            <li><a href="add_rental_contract.php" class="hover:text-gray-200">Add Rental Contract</a></li>
-            <li><a href="view_rental_contracts.php" class="hover:text-gray-200">View Rental Contracts</a></li>
-        </ul>
-    </nav>
+    <?php include '../../inc/header.php'; ?>
 
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl font-bold text-gray-700 mb-6 text-center">Edit Car</h1>
@@ -99,7 +89,6 @@
         <label class="block text-gray-700">Status:</label>
         <select name="status" class="shadow appearance-none border rounded w-full py-2 px-3">
             <option  value="Available" <?php echo ($result['status'] == 'Available') ? 'selected' : ''; ?>>Available</option>
-            <option value="Rented" <?php echo ($result['status'] == 'Rented') ? 'selected' : ''; ?>>Rented</option>
             <option value="Maintenance" <?php echo ($result['status'] == 'Maintenance') ? 'selected' : ''; ?>>Maintenance</option>
         </select>
     </div>
