@@ -36,13 +36,13 @@
     }
 
     $attr = 'disabled';
-    $classes = "appearance-none border border-transparent rounded w-full py-2 px-3";
+    $classes = "bg-white border border-transparent rounded w-full py-2 px-3";
     $edit = false;
 
     if (isset($_GET['edit']) && $_GET['edit'] == "true") {
         $edit = true;
         $attr = '';
-        $classes = "shadow border appearance-none rounded w-full py-2 px-3";
+        $classes = "shadow border bg-white rounded w-full py-2 px-3";
     }
 ?>
 
@@ -71,7 +71,6 @@
             <?php endif; ?>
             <div class="mb-4">
                 <label class="block text-gray-700" for="username">Username:</label>
-                <!-- <input type="text" name="make" class="shadow appearance-none border rounded w-full py-2 px-3" value=""> -->
                 <input type="text" name="username" id="username" class="<?php echo $classes; ?>" <?php echo $attr; ?> value="<?php echo $user -> getUsername(); ?>" placeholder="Enter a username">
             </div>
             <div class="mb-4">

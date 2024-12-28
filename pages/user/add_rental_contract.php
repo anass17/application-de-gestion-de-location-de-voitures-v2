@@ -38,7 +38,7 @@
         $isInserted = $contract -> create();
 
         if ($isInserted) {
-            header("Location: view_rental_contracts.php");
+            header("Location: view_my_rental_contracts.php");
             exit;
         } else {
             echo 'Error';

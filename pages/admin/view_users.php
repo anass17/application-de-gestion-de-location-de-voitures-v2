@@ -13,7 +13,7 @@
     $conn = (new Database) -> connect();
 
     $user = new User($conn);
-    $user -> setId($_SESSION['id']);
+    $user -> fetchById($_SESSION['id']);
     $users_result = $user -> fetchAll();
 ?>
 
@@ -46,41 +46,31 @@
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
-                <?php
-                    if (count($users_result) > 0) {
-                        foreach ($users_result as $row) {
-                            echo "<tr class='border-b border-gray-200 hover:bg-gray-100'>
-                                    <td class='py-3 px-6 text-left'>{$row['id']}</td>
-                                    <td class='py-3 px-6 text-left'>{$row['username']}</td>
-                                    <td class='py-3 px-6 text-left'>{$row['Address']}</td>
-                                    <td class='py-3 px-6 text-left'>{$row['phoneN']}</td>
-                                    <td class='py-3 px-6 text-left'>{$row['email']}</td>
-                                    <td class='py-3 px-6 text-left'>{$row['role']}</td>
-                                    <td class='py-3 px-6 text-center'>
-                                        <a href='edit_client.php?id={$row['id']}' class='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2'>Edit</a>
-                                        <button class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600' onclick='showModal({$row['id']})'>Delete</button>
-                                    </td>
-                                </tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='6' class='py-3 px-6 text-center'>No clients found.</td></tr>";
-                    }
-                ?>
+                <?php if (count($users_result) > 0): ?>
+                    <?php foreach ($users_result as $row): ?>
+                        <tr class='border-b border-gray-200 hover:bg-gray-100'>
+                            <td class='py-3 px-6 text-left'><?php echo $row['id']; ?></td>
+                            <td class='py-3 px-6 text-left'><?php echo $row['username']; ?></td>
+                            <td class='py-3 px-6 text-left'><?php echo $row['Address']; ?></td>
+                            <td class='py-3 px-6 text-left'><?php echo $row['phoneN']; ?></td>
+                            <td class='py-3 px-6 text-left'><?php echo $row['email']; ?></td>
+                            <td class='py-3 px-6 text-left'><?php echo $row['role']; ?></td>
+                            <td class='py-3 px-6 text-center'>
+                                <?php if ($row['role'] == 'user'): ?>
+                                    <a href='delete_user.php?id=<?php echo $row['id']; ?>' class='bg-red-500 text-white w-24 py-2 rounded hover:bg-red-600 inline-block border'>Delete</a>
+                                <?php else: ?>
+                                    <button class='bg-gray-100 w-24 py-2 rounded inline-block border'>No Actions</button>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                        <tr><td colspan='6' class='py-3 px-6 text-center'>No clients found.</td></tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-lg font-bold text-gray-700">Confirm Deletion</h2>
-            <p class="text-gray-600 mt-4">Are you sure you want to delete this client?</p>
-            <div class="flex justify-between mt-6">
-                <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" id="confirmDelete">Yes, Delete</button>
-                <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400" onclick="closeModal()">Cancel</button>
-            </div>
-        </div>
-    </div>
 <script src="viewC.js"></script>
 </body>
 </html>

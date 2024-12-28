@@ -39,15 +39,15 @@
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl font-bold text-gray-700 text-center mb-6">My Contracts</h1>
 
-        <table class="min-w-full bg-white shadow-md rounded">
+        <table class="min-w-full bg-white shadow-md rounded text-center">
             <thead>
                 <tr>
                     <th class="py-2 px-4 border">ID</th>
-                    <th class="py-2 px-4 border">Client Name</th> <!-- Show client name -->
+                    <th class="py-2 px-4 border">Client Name</th>
                     <th class="py-2 px-4 border">Car Make</th>
+                    <th class="py-2 px-4 border">Car Model</th>
                     <th class="py-2 px-4 border">Rental Date</th>
                     <th class="py-2 px-4 border">Return Date</th>
-                    <th class="py-2 px-4 border">Total Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,9 +58,9 @@
                                 <td class='py-2 px-4 border'>{$row['id']}</td>
                                 <td class='py-2 px-4 border'>{$row['username']}</td>
                                 <td class='py-2 px-4 border'>{$row['make']}</td>
+                                <td class='py-2 px-4 border'>{$row['model']}</td>
                                 <td class='py-2 px-4 border'>{$row['rental_date']}</td>
                                 <td class='py-2 px-4 border'>{$row['return_date']}</td>
-                                <td class='py-2 px-4 border'>{$row['total_amount']}</td>
                             </tr>";
                     }
                 } else {

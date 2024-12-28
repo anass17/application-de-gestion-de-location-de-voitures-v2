@@ -38,16 +38,18 @@
     <div class="container mx-auto mt-10 px-4">
         <h1 class="text-3xl font-bold text-gray-700 text-center mb-6">Cars List</h1>
         <div class="overflow-x-auto">
-            <table class="table-auto w-full bg-white shadow-md rounded border border-gray-300">
+            <table class="table-auto w-full bg-white shadow-md rounded border border-gray-300 text-center">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 py-2 text-left">ID</th>
-                        <th class="px-4 py-2 text-left">Make</th>
-                        <th class="px-4 py-2 text-left">Model</th>
-                        <th class="px-4 py-2 text-left">Year</th>
-                        <th class="px-4 py-2 text-left">License Plate</th>
-                        <th class="px-4 py-2 text-left">Status</th>
-                        <th class="px-4 py-2 text-left">Actions</th>
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Make</th>
+                        <th class="px-4 py-2">Model</th>
+                        <th class="px-4 py-2">Year</th>
+                        <th class="px-4 py-2">License Plate</th>
+                        <th class="px-4 py-2">Status</th>
+                        <?php if ($user -> getRole() == 'admin'): ?>
+                            <th class="px-4 py-2">Actions</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,10 +61,12 @@
                             <td class="px-4 py-2"><?= $row['year'] ?></td>
                             <td class="px-4 py-2"><?= $row['license_plate'] ?></td>
                             <td class="px-4 py-2"><?= $row['status'] ?></td>
-                            <td class="px-4 py-2">
-                                <a href="../admin/edit_car.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:underline">Edit</a> | 
-                                <a href="../admin/delete_car.php?id=<?= $row['id'] ?>" class="text-red-600 hover:underline">Delete</a>
-                            </td>
+                            <?php if ($user -> getRole() == 'admin'): ?>
+                                <td class="px-4 py-2">
+                                    <a href="../admin/edit_car.php?id=<?= $row['id'] ?>" class="bg-blue-500 text-white w-24 py-2 rounded hover:bg-blue-600 inline-block border text-center mr-2">Edit</a>
+                                    <a href='/pages/admin/delete_car.php?id=<?php echo $row['id']; ?>' class='bg-red-500 text-white w-24 py-2 rounded hover:bg-red-600 inline-block border text-center'>Delete</a>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

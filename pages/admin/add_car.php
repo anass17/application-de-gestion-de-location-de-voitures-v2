@@ -11,14 +11,14 @@
         exit();
     }
 
+    $conn = (new Database) -> connect();
+
+    $user = new User($conn);
+    $user -> fetchById($_SESSION['id']);
+
+    $car = new Car($conn, $user);
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        $conn = (new Database) -> connect();
-
-        $user = new User($conn);
-        $user -> fetchById($_SESSION['id']);
-
-        $car = new Car($conn, $user);
 
         $car -> setMake($_POST['make']);
         $car -> setModel($_POST['model']);

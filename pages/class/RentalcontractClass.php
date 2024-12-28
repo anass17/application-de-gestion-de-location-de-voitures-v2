@@ -96,7 +96,7 @@ class RentalContract {
     // Update rental contract
     public function update() {
         if (!$this->user->isAdmin()) {
-            $this -> error = "You don't have permission to view cars";
+            $this -> error = "You don't have permission to update contract";
             return false;
         }
         $sql = "UPDATE rentalcontracts SET car_id = ?, rental_date = ?, return_date = ? WHERE id = ?";
@@ -112,7 +112,8 @@ class RentalContract {
     // Delete rental contract
     public function delete() {
         if (!$this->user->isAdmin()) {
-            return "You don't have permission to view cars.";
+            $this -> error = "You don't have permission to delete contract";
+            return false;
         }
         $sql = "DELETE FROM rentalcontracts WHERE id = ?";
         $stmt = $this->conn->prepare($sql);

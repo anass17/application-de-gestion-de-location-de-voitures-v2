@@ -28,7 +28,7 @@
 </head>
 <body class="bg-gray-100">
     <!-- Navbar Section -->
-    <?php include '../../inc/header.php'; ?>
+    <?php include 'inc/header.php'; ?>
 
     <div class="container mx-auto mt-10">
         <h1 class="text-2xl font-bold text-gray-700 text-center">Welcome, <?php echo htmlspecialchars($user -> getUsername()); ?>!</h1>
