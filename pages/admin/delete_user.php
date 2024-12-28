@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+    include '../../inc/session_activity.php';
 
     require_once '../../vendor/autoload.php';
     require '../../connection/db.php';

@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+    include '../../inc/session_activity.php';
 
     if (!isset($_SESSION['id'])) {
         header("Location: ../../auth/login.php");
