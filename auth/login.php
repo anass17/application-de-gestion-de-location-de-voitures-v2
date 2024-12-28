@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label class="block text-gray-700">Password:</label>
                 <input type="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3">
             </div>
+            <a href="register.php" class="font-semibold text-blue-500 mb-5 block">Create an account?</a>
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">Login</button>
         </form>
     </div>

@@ -74,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label class="block text-gray-700">Confirm Password:</label>
                 <input type="password" name="confirm_password" class="shadow appearance-none border rounded w-full py-2 px-3">
             </div>
+            <a href="login.php" class="font-semibold text-blue-500 mb-5 block">You have an account?</a>
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">Register</button>
         </form>
     </div>
