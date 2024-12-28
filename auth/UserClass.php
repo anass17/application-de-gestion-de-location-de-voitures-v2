@@ -88,7 +88,7 @@ class User {
 
         $hashedPassword = password_hash($this -> password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (username, email, password, role, phoneN, Address) VALUES (?, ?, ?, 'admin', ?, ?)";
+        $sql = "INSERT INTO users (username, email, password, role, phoneN, Address) VALUES (?, ?, ?, 'user', ?, ?)";
         $stmt = $this->conn->prepare($sql);
 
         if ($stmt->execute([$this->username, $this->email, $hashedPassword, $this->phone, $this->address])) {
