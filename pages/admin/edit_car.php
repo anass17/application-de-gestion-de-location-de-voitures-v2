@@ -21,6 +21,7 @@
         $user -> fetchById($_SESSION['id']);
 
         $car = new Car($conn, $user);
+        $car -> setId($carId);
 
         $result = $car -> getById($carId);
     } else {
@@ -37,24 +38,17 @@
         $license_plate = $_POST['license_plate'];
         $status = $_POST['status'];
 
-        $sql = "UPDATE cars SET make = :make, model = :model, year = :year, 
-                license_plate = :license, status = :status WHERE id = :id";
+        $car -> setMake($make);
+        $car -> setModel($model);
+        $car -> setYear($year);
+        $car -> setLicensePlate($license_plate);
+        $car -> setStatus($status);
 
-        $stmt = $conn -> prepare($sql);
-        $isExecuted = $stmt -> execute(array(
-            ':make' => $make,
-            ':model' => $model,
-            ':year' => $year,
-            ':license' => $license_plate,
-            ':status' => $status,
-            ':id' => $carId
-        ));
-
-        if ($isExecuted == true) {
+        if ($car -> update()) {
             header('Location: ../user/view_cars.php');
             exit();
         } else {
-            echo 'Error';
+            echo 'Error: Could not update the car information';
         }
 
     }
